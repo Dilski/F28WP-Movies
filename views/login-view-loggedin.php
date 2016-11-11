@@ -16,6 +16,25 @@
 <form method="POST" action="">
 <input type="submit" name="logout" value="logout">
 </form>
+
+<table style="width:100%">
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <?php foreach ($movieList as $movie): ?>
+        <tr>
+            <td><?= $movie['movieTitle'] ?></td>
+            <td><?= $movie['movieGenre'] ?></td>
+            <td><?= $movie['movieRating'] ?></td>
+            <td></td>
+            <td></td>
+        </tr>
+    <?php endforeach ?>
+</table>
 	
 </body>
 </html>

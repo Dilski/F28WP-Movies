@@ -21,8 +21,6 @@ if(isset($_SESSION['username'])) {
 	$moviesModel = new moviesModel($dataBase);
 	
 	$movieList = $moviesModel->getUserMovies($_SESSION['id']);
-	print_r($_SESSION);
-	print_R($movieList);
 	include 'views/login-view-loggedin.php';
 } else {
 	include 'views/login-view-login.php';

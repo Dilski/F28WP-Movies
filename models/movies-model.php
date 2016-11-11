@@ -13,7 +13,7 @@ class moviesModel {
 	function getAMovie() {
 		return $this->database->query("SELECT * from my_movies WHERE movieID = 1");
 	}
-	
+
 	function getUserMovies($userID) {
 
 		$query = $this->database->prepare(
@@ -29,4 +29,3 @@ class moviesModel {
 	}
 
 }
-?>
