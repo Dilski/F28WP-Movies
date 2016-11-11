@@ -17,18 +17,19 @@ class loginModel
             if (!(isset($user) && isset($pass))) {
                 echo "Please submit a username and a password";
             } else {
-            	echo $user.$pass;
-                $query = $this->dbConnection->prepare('Select `password` FROM `my_users` WHERE `username` = :id');
+                $query = $this->dbConnection->prepare('Select * FROM `my_users` WHERE `username` = :id');
 						                
                 $query->execute(array(':id' => $user));
-                $hashFetch = $query->fetch()[0];
+                $hashFetch = $query->fetch();
+                $password = $hashFetch['password'];
+                $id = $hashFetch['userID'];
            
                 
-                if (password_verify($pass, $hashFetch)){
-                	session_start();
+                if (password_verify($pass, $password)){
                 	$_SESSION['username'] = $user;
+                	$_SESSION['id'] = $id;
                 	} else {
-                		echo "Password Incorrect"; 
+                		echo "Username/Password Incorrect"; 
 
 							}
             }

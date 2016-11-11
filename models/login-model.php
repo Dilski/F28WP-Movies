@@ -26,7 +26,6 @@ class loginModel
            
                 
                 if (password_verify($pass, $password)){
-                	session_start();
                 	$_SESSION['username'] = $user;
                 	$_SESSION['id'] = $id;
                 	} else {
