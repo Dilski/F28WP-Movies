@@ -1,5 +1,5 @@
 <?php 
-$whitelist = array("movies","login");
+$whitelist = array("movies","login","test");
 
 
 if (in_array($_GET['p'], $whitelist)) {
