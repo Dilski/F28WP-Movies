@@ -1,13 +1,19 @@
 <?php 
-$whitelist = array("movies","login","test");
+$debug = false;
 
+include 'views/status.php';
 
+$whitelist = array("movies","login");
+
+if(!isset($_GET['p'])) { $_GET['p'] = '';}
 if (in_array($_GET['p'], $whitelist)) {
-	include $_GET['p'].'.php';
+	$name = $_GET['p'];
+	include "{$name}.php";
 } else {
-	echo "<h1> Site Map </h1>";
+	$sitemap = "<h1> Site Map </h1>";
 	foreach($whitelist as $page) {
 		
-		echo "<p><a href='./?p=".$page."'> $page</a></p>";
+		$sitemap .= "<p><a href='./?p=".$page."'> $page</a></p>";
 	}
+	include 'views/project.php';
 }

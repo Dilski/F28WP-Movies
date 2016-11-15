@@ -6,8 +6,9 @@
 
   <title>Movies</title>
   <meta name="description" content="Stuff about movies">
-  <meta name="author" content="Dillon Fearns">
-
+  <meta name="author" content="Dillon J Fearns" >
+  <link rel="stylesheet" href="assets/style/stylesheet.css" type="text/css"> 
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
 </head>
 
 <body>	
