@@ -1,7 +1,7 @@
 <?php 
-$debug = false;
+$debug = true;
 
-include 'views/status.php';
+//include_once "views/status.php";
 
 $whitelist = array("movies","login");
 

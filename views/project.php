@@ -11,7 +11,7 @@
 <h1>Welcome to my Website!</h1>
 <br>
 <p> I am creating a Q&A website, and the core functionality that i am
-working on is user accounts, which i plan to develop as follows:</p>
+working on is user accounts (with my own MVC design pattern), which i plan to develop as follows:</p>
 <br>
 <ol>
     <li>User will be given option to create an account or login</li>

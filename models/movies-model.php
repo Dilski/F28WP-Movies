@@ -51,5 +51,14 @@ class moviesModel {
 		$query->bindParam(':user', $userID);
 		$query->execute();
 	}
+	
+	function deleteMovie($movieID) {
+
+		$sql = "DELETE FROM my_movies WHERE movieID = :movieID";
+		
+		$query = $this->database->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$query->bindParam(':movieID', $movieID);
+		$query->execute();
+	}
 
 }

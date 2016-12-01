@@ -20,6 +20,8 @@
     <a style="float: right" class="button" id="add-movie" href="#">Add Movie</a>
     <a style="float: right" class="button" id="logout-trig" href="">Logout</a>
     <a style="float: right" href="">Welcome <?= $_SESSION['username'] ?> </a>
+
+
   
 </nav>	
 <main>
@@ -35,16 +37,18 @@
         <th>Poster</th>
         <th>Action</th>
     </tr>
-    <?php foreach ($movieList as $movie): ?>
+    <?php $movieList = null;
+    foreach ($movieList as $movie): ?>
         <tr>
             <td><a href="<?= $movie['movieURL'] ?>" ><?= $movie['movieTitle'] ?></a></td>
             <td><?= $movie['movieGenre'] ?></td>
             <td><?= $movie['movieRating'] ?></td>
-            <td></td>
-            <td></td>
+            <td><a class="btn getPoster" data-title="<?= $movie['movieTitle'] ?>" href="#" > View </a></td>
+            <td><a class="btn deleteMovie" data-id="<?= $movie['movieID'] ?>" href="#" > Delete </a></td>
         </tr>
     <?php endforeach ?>
 </table>
+    <span id="deleteID" >This</span>
 <div class="middle" id="add-form" style="display: none;">
     <form action="" method="POST">
         <label for="Title">Title</label><br><input type="text" name="Title" required /><br>
@@ -59,12 +63,49 @@
 <script type="text/javascript" >
 $(document).ready(function() {
 	$( "#add-movie" ).click(function() {
-		$( "#add-form" ).toggle();
+		$( "#add-form" ).fadeToggle( "fast", "linear" );
 	});
 	$( "#logout-trig" ).click(function() {
 		$.post("", { logout: "true"}, window.location);
 	});
-});
+	
+	$(".deleteMovie").click(function () {
+        var id = $(this).data("id");
+        $("#deleteID").text("Thing" + id);
+        $.ajax({
+            type: 'POST',
+            data: {'delete':'true', 'idtoDelete': id },
+            success: $(this).parent().parent().replaceWith(" <tr><td colspan='5' class='text-center'>deleted</td><tr> "),
+            error: $(this).replaceWith(" <p> Error </p> ")
+        })
+
+    });
+
+    $(".getPoster").click(function () {
+        var $el = $(this);
+        var name = $el.data("title");
+
+        $.post( "", {'fetchPoster': name })
+            .done(function (data) {
+                var jsonRet = $.parseJSON(data);
+
+                if (!jsonRet['Search']) {
+                    $el.attr({
+                        "class": "btn btn-error"
+                    });
+                    $el.text("Failed");
+                } else {
+                    var img = jsonRet['Search'][0]["Poster"];
+                    $el.replaceWith(" <img src='" + img +  "'/> ");
+                }
+
+
+
+            });
+
+        })
+
+    });
 </script>
 </body>
 </html>

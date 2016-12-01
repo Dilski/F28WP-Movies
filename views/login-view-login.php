@@ -17,10 +17,12 @@
 <div class="centered color-block">
 <h1 class="text-center">Please log in</h1>
 <br>
-<form method="POST" action="">
-<label for="username" >Username: </label><br><input type="text" name="username" value="<?php if (isset($_POST['username'])) { echo $_POST['username']; } ?>" <?php if (!isset($_POST['username'])) { echo "autofocus"; } ?> required><br />
+<p style="color: #ff372a;"><?= (isset($problemo)) ? $problemo  : ""?></p>
 <br>
-<label for="password" >Password: </label><br><input type="password" name="password" <?php if (isset($_POST['username'])) { echo "autofocus"; } ?> required><br />
+<form method="POST" action="">
+<label for="username" >Username: </label><br><input type="text" name="username" value="<?php if (isset($_POST['username'])) { echo $_POST['username']; } ?>" <?php if (!isset($_POST['username'])) { echo "autofocus"; } ?> required title="username"><br />
+<br>
+<label for="password" >Password: </label><br><input type="password" name="password" <?php if (isset($_POST['username'])) { echo "autofocus"; } ?> required title="password"><br />
 <input type="submit" name="submit">
 </form>
 </div>

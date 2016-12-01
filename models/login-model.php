@@ -15,23 +15,23 @@ class loginModel
     {
         try {
             if (!(isset($user) && isset($pass))) {
-                echo "Please submit a username and a password";
+                return "Please submit a username and a password";
             } else {
-                $query = $this->dbConnection->prepare('Select * FROM `my_users` WHERE `username` = :id');
-						                
+                $query = $this->dbConnection->prepare('SELECT * FROM `my_users` WHERE `username` = :id');
+
                 $query->execute(array(':id' => $user));
                 $hashFetch = $query->fetch();
                 $password = $hashFetch['password'];
                 $id = $hashFetch['userID'];
-           
-                
-                if (password_verify($pass, $password)){
-                	$_SESSION['username'] = $user;
-                	$_SESSION['id'] = $id;
-                	} else {
-                		echo "Username/Password Incorrect"; 
 
-							}
+
+                if (password_verify($pass, $password)) {
+                    $_SESSION['username'] = $user;
+                    $_SESSION['id'] = $id;
+                } else {
+                    return "Username/Password Incorrect";
+
+                }
             }
 
         } catch (PDOException $e) {
@@ -42,4 +42,5 @@ class loginModel
 
 
 }
+
 ?>
