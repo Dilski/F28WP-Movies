@@ -17,12 +17,18 @@
 
 <body>
 
+<?php if (session::isKeySet('id')): ?>
 <nav>
     <a href="<?= URL ?>">Home</a>
-    <a style="float: right" class="button" id="edit" href="#">Edit </a>
     <a style="float: right" class="button" id="logout-trig" href="">Logout</a>
     <a style="float: right" href="">Welcome <?= session::get('username') ?> </a>
-</nav>	
+</nav>
+<?php else: ?>
+<nav>
+    <a href="<?= URL ?>">Home</a>
+    <a style="float: right" class="button" id="logout-trig" href="<?= URL . '?p=login' ?>">Login</a>
+</nav>
+<?php endif; ?>
 <main>
 <h1 class="text-center">User Profile</h1>
 
@@ -44,17 +50,14 @@
     <tr>
         <td>Location</td>
         <td class="info_col"><span id="location_text"><?= $userInfo['userLocation'] ?></span></td>
-        <td style="display: none" class="info_col"> <input id="location_input" type="text" value="<?= $userInfo['userLocation'] ?>"></td>
     </tr>
     <tr>
         <td>About</td>
         <td class="info_col"><span id="about_text"><?= $userInfo['userAbout'] ?></span></td>
-        <td style="display: none" class="info_col"> <input type="text" id="about_input" value="<?= $userInfo['userAbout'] ?>"></td>
     </tr>
     <tr>
         <td>Email</td>
         <td class="info_col"><span id="email_text"><?= $userInfo['userEmail'] ?></span></td>
-        <td style="display: none" class="info_col"> <input id="email_input" type="email" value="<?= $userInfo['userEmail'] ?>"></td>
     </tr>
     <input type="button" id="save" style="display: none" class="btn btn-valid info_col" value="Save">
 </table>
@@ -66,35 +69,12 @@
 <script type="text/javascript" >
     $(document).ready(function () {
 
-        $("#edit").click(function () {
-            $(".info_col").toggle()
-        });
-
         $("#logout-trig").click(function () {
-            $.post("", {logout: "true"}, window.location);
-        });
-
-        $("#save").click(function () {
-            var location = $("#location_input").val();
-            var about = $("#about_input").val();
-            var email = $("#email_input").val();
-
-
-
-            $(".info_col").toggle();
-
-            $.post("", {
-                'edit': true,
-                'location': location,
-                'about': about,
-                'email': email
-            }).done(function( response ) {
-                var data = JSON.parse(response);
-                $("#location_text").text(data["userLocation"]);
-                $("#about_text").text(data["userAbout"]);
-                $("#email_text").text(data["userEmail"]);
+            $.post("", {logout: "true"}).done(function () {
+                location.reload(true);
             });
         });
+
     });
 </script>
 </body>
